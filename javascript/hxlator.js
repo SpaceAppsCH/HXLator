@@ -90,7 +90,7 @@ function update_for_type(type){
     var coloptions;
     coloptions = type.attributes;
     if("children" in type){
-	coloptions = coloptions.concat(type.children);
+	coloptions.push('type');
     }
     update_columns(coloptions);
 }
