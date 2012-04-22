@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    $('td').click(function(event){
+    $('td.cell').click(function(event){
         select_cell(event.target.id);
     }
 		 );
