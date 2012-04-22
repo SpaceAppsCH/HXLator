@@ -17,12 +17,13 @@ queryUrl = 'http://jsonp.lodum.de/?endpoint=' + endpointURL
 
 #=====================================
 
-
+JAVASCRIPT_FOLDER = 'javascript'
 UPLOAD_FOLDER = 'uploads'
 ALLOWED_EXTENSIONS = set(['xls','xlsx'])
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['JAVASCRIPT_FOLDER'] = JAVASCRIPT_FOLDER
 
 #===========my addition===============
 # this function is to 0 to numbers smaller then 10 to match the RDF standard
@@ -105,15 +106,7 @@ def upload_file():
             rows = read_rows(filepath)
             return render_template('table.html', rows=rows)
 
-    return '''
-    <!doctype html>
-    <title>Upload new File</title>
-    <h1>Upload new File</h1>
-    <form action="" method=post enctype=multipart/form-data>
-      <p><input type=file name=file>
-         <input type=submit value=Upload>
-    </form>
-    '''
+    return render_template('upload.html')
 
 def save_file(inputfile):
     filename = secure_filename(inputfile.filename)
@@ -134,6 +127,12 @@ def read_rows(filepath):
 def uploaded_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'],
                                filename)
+
+@app.route('/javascript/<filename>')
+def javascript(filename):
+    return send_from_directory(app.config['JAVASCRIPT_FOLDER'],
+                               filename)
+
 @app.route('/hxl_processor/',methods=['GET','POST'])
 def process_hxl():
   #parse it here
