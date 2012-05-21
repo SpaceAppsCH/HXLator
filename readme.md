@@ -1,3 +1,6 @@
+**The development of HXLator continues at https://github.com/SpaceAppsCH/HXLator**  
+
+
 International SpaceApp Challenge 2012 
 <br/>
 <br/>
